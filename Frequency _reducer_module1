@@ -1,0 +1,28 @@
+`timescale 1ns / 1ps
+
+//========================================================================
+//module : Frequency reducer
+//purpose: to reduce teh 100Mhz to  4khz
+//========================================================================= 
+module  frequency_reducer(
+
+    input clk_in,rst,
+    output reg clk_op
+    );
+    reg [25:0] count;
+    
+    always @(posedge clk_in)begin
+        if(rst)begin
+            count<=0;
+            clk_op<=0;
+        end 
+        else begin
+            count<=count+1;
+                if(count==10)begin
+                    count<=0;
+                    clk_op<=~clk_op;
+                end 
+         end
+    end 
+            
+endmodule
