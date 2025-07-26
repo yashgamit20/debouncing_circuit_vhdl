@@ -1,0 +1,20 @@
+//=========================================================================
+//module : D-flipflop
+//purpose : To remove the factor of deboucing circuit 
+//========================================================================
+
+module dff(
+    input d,
+    input clk_in,
+    output reg q,
+    output reg qbar
+);
+    initial begin
+        q<=0;
+        qbar<=1;
+    end 
+    always @(posedge clk_in)begin
+        q<=d;
+        qbar<=~d;
+    end 
+endmodule 
