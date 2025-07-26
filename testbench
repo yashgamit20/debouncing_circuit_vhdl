@@ -1,0 +1,27 @@
+module tb_debouncing_circuit;
+    reg d,clk_in;
+    wire q,qbar;
+    reg rst;
+    wire clk_op;
+    
+    dff dut(.d(d),.clk_in(clk_op),.q(q),.qbar(qbar));
+    frequency_reducer dut2(.clk_in(clk_in),.rst(rst),.clk_op(clk_op));
+    
+    initial begin
+        clk_in=0;
+        forever #5 clk_in=~clk_in;
+    end
+    
+    initial begin
+        $display ("time\t clk_in\t d\t q\t qbar\t clk_out\t rst\t ");
+        $monitor("%0t\t %d\t %d\t %d\t %d\t %d\t %d\t ",$time,clk_in,d,q,qbar,clk_op,rst);
+        
+        rst=1;clk_in=0;d=0;#10;
+        rst=0;clk_in=1;d=1;#100;
+        d=0;#100;
+        d=1;#100;
+        #10_000;
+        
+        $finish;
+        end  
+endmodule
