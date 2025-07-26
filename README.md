@@ -46,5 +46,5 @@ This project implements a **pushbutton debouncing circuit** using Verilog HDL. I
 
 ---
 
-## 📂 File Structure
+
 
